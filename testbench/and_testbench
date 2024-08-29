@@ -1,0 +1,45 @@
+#! /c/iverilog/bin/vvp
+:ivl_version "0.9.7 " "(v0_9_7)";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_01274ED8 .scope module, "and_testbench" "and_testbench" 2 3;
+ .timescale 0 0;
+v01271660_0 .var "A", 0 0;
+v012734A0_0 .var "B", 0 0;
+v012734F8_0 .net "Y", 0 0, L_012716B8; 1 drivers
+S_012750B8 .scope module, "instance0" "and_1" 2 6, 3 1, S_01274ED8;
+ .timescale 0 0;
+L_012716B8 .functor AND 1, v01271660_0, v012734A0_0, C4<1>, C4<1>;
+v01275140_0 .net "A", 0 0, v01271660_0; 1 drivers
+v012715B0_0 .net "B", 0 0, v012734A0_0; 1 drivers
+v01271608_0 .alias "Y", 0 0, v012734F8_0;
+    .scope S_01274ED8;
+T_0 ;
+    %set/v v01271660_0, 0, 1;
+    %set/v v012734A0_0, 0, 1;
+    %delay 1, 0;
+    %set/v v01271660_0, 0, 1;
+    %set/v v012734A0_0, 1, 1;
+    %delay 1, 0;
+    %set/v v01271660_0, 1, 1;
+    %set/v v012734A0_0, 0, 1;
+    %delay 1, 0;
+    %set/v v01271660_0, 1, 1;
+    %set/v v012734A0_0, 1, 1;
+    %end;
+    .thread T_0;
+    .scope S_01274ED8;
+T_1 ;
+    %vpi_call 2 14 "$monitor", "%t | A = %d | B = %d | Y = %d", $time, v01271660_0, v012734A0_0, v012734F8_0;
+    %vpi_call 2 15 "$dumpfile", "dump.vcd";
+    %vpi_call 2 16 "$dumpvars";
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "and_testbench.v";
+    "./and_1.v";
